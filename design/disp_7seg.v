@@ -1,15 +1,15 @@
 `timescale 1s / 1ps
 //////////////////////////////////////////////////////////////////////////////////
 // Company: 
-// Engineer: 
+// Engineer: Aaron Tartz
 // 
-// Create Date: 04/17/2024 02:38:11 AM
+// Create Date: 04/02/2024 02:38:11 AM
 // Design Name: 
 // Module Name: top4
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Prints tens, ones, and tenths place on three 7 segment displays
 // 
 // Dependencies: 
 // 
@@ -22,6 +22,7 @@
 
 module disp_7seg(
     input wire clk100MHz,
+    input wire [1:0] cmd_in,
     //input wire [4:0] data_in_first,
     //input wire [4:0] data_in_second,
     input wire [15:0] data_in,
@@ -51,13 +52,39 @@ module disp_7seg(
     
     //wire [15:0] driver = 16'b110010001011100;
     //reg [31:0] 
+    /*
+    always @(posedge cmd_in) begin      // combinational logic
+        if (cmd_in == 2'b00) begin
+            data_in_tens = (((125 * data_in) >> 17) - 6) / 10;
+            data_in_ones = (((125 * data_in) >> 17) - 6) % 10;
+            data_in_decimal = (((1250 * data_in) >> 17) - 60) - (data_in_tens * 100) - (data_in_ones * 10);
+        end
+        else if (cmd_in == 2'b01) begin
+            data_in_tens = ((((1581 * data_in) >> 17) / 5) - 52) / 10;
+            data_in_ones = ((((1581 * data_in) >> 17) / 5) - 52) % 10;
+            data_in_decimal = ((((15810 * data_in) >> 17) / 5 ) - 520) - (data_in_tens * 100) - (data_in_ones * 10);
+        end
+        else if (cmd_in == 2'b10) begin
+            data_in_tens = ((((176 * data_in) >> 17) / 5) - 52) / 10;
+            data_in_ones = (((176 * data_in) >> 17) - 47) % 10;
+            data_in_decimal = (((1760 * data_in) >> 17) - 470) - (data_in_tens * 100) - (data_in_ones * 10);
+        end
+    end
+    */
+    //assign data_in_tens = (((176 * data_in) >> 17) - 47) / 10;
+    //assign data_in_ones = (((176 * data_in) >> 17) - 47) % 10;
+    //assign data_in_decimal = (((1760 * data_in) >> 17) - 470) - (data_in_tens * 100) - (data_in_ones * 10);
     
-    assign data_in_tens = (((176 * data_in) >> 17) - 47) / 10;
-    assign data_in_ones = (((176 * data_in) >> 17) - 47) % 10;
-    assign data_in_decimal = (((1760 * data_in) >> 17) - 470) - (data_in_tens * 100) - (data_in_ones * 10);
-    //assign data_in_decimal = 4'b110110
+    //assign data_in_tens = ((((125 * data_in) >> 17) - 6) / 10) >= 5 ? ((((125 * data_in) >> 17) - 6) / 10) - 4 : ((((125 * data_in) >> 17) - 6) / 10);
+    //assign data_in_tens = (((125 * data_in) >> 17) - 6) / 10;
+    //assign data_in_ones = (((125 * data_in) >> 17) - 6) % 10;
+    //assign data_in_decimal = (((1250 * data_in) >> 17) - 60) - (data_in_tens * 100) - (data_in_ones * 10);
     
-    always @(posedge clk100MHz) begin
+    assign data_in_tens = ((((1581 * data_in) >> 17) / 5) - 52) / 10;
+    assign data_in_ones = ((((1581 * data_in) >> 17) / 5) - 52) % 10;
+    assign data_in_decimal = ((((15810 * data_in) >> 17) / 5 ) - 520) - (data_in_tens * 100) - (data_in_ones * 10);
+    
+    always @(posedge clk100MHz) begin       // sequential logic
         //data <= 8'd176 * data_in_driver;
         ////data <= 176 * data_in;   //put into separate func later
         //data <= data >> 16;
