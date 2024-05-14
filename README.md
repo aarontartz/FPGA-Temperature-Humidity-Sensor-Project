@@ -1,3 +1,3 @@
 # FPGA Temperature Sensor Project
 
-IN PROGRESS
+In Progress
