@@ -1,3 +1,3 @@
 # FPGA Temperature Sensor Project
 
-First Vivado project, developed in 2 weeks
+First ever Vivado project, planned and developed in 2 weeks
