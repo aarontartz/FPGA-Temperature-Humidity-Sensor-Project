@@ -86,9 +86,6 @@ module i2c_master(
     assign scl_out = clk_reg;
     
     assign clk100kHz_double = clk_reg_double;
-    //assign clk100kHz = clk_reg;
-    
-    //assign data_out = {MSB_byte[7:0], LSB_byte[7:0]};
     assign data_out = data_reg;
     
     //TESTING
