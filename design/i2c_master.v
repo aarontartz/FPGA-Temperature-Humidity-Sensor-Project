@@ -46,8 +46,6 @@ module i2c_master(
     reg i_bit = 0;
     reg nack_ack = 0;                 // checks when slave is done converting - will nack until done
     reg [15:0] data_reg;
-    //reg [15:0] temp_data;
-    //reg [15:0] hum_data;	
 
     // State Declarations
     localparam [3:0] START          = 4'b0000,
