@@ -122,7 +122,6 @@ module i2c_master(
             START: begin
                 if (clk_gen_counter < 499) begin
                     sda_write_en <= 1;
-                    //sda_write_en <= 1;
                     // to start I2C, pull SDA LOW while SCL HIGH
                     o_bit <= 0;                 // send START condition
 
